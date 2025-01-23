@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/pg_simple.dir/src/main.cpp.o CMakeFiles/pg_simple.dir/src/ElementsMath.cpp.o CMakeFiles/pg_simple.dir/src/Shaders.cpp.o -o pg_simple  /usr/lib/x86_64-linux-gnu/libglfw.so.3.3 -lGL -lGLEW 

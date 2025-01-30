@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/pg_simple.dir/src/Elements.cpp.o"
+  "CMakeFiles/pg_simple.dir/src/Elements.cpp.o.d"
   "CMakeFiles/pg_simple.dir/src/ElementsMath.cpp.o"
   "CMakeFiles/pg_simple.dir/src/ElementsMath.cpp.o.d"
   "CMakeFiles/pg_simple.dir/src/Shaders.cpp.o"

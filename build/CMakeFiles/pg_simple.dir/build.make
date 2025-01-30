@@ -83,10 +83,24 @@ CMakeFiles/pg_simple.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/pg_simple.dir/src/main.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/arguableplains/Documents/Workspace/Programacoes/C++/Graphics/ProceduralGeneration-Simple/src/main.cpp -o CMakeFiles/pg_simple.dir/src/main.cpp.s
 
+CMakeFiles/pg_simple.dir/src/Elements.cpp.o: CMakeFiles/pg_simple.dir/flags.make
+CMakeFiles/pg_simple.dir/src/Elements.cpp.o: ../src/Elements.cpp
+CMakeFiles/pg_simple.dir/src/Elements.cpp.o: CMakeFiles/pg_simple.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/arguableplains/Documents/Workspace/Programacoes/C++/Graphics/ProceduralGeneration-Simple/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/pg_simple.dir/src/Elements.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pg_simple.dir/src/Elements.cpp.o -MF CMakeFiles/pg_simple.dir/src/Elements.cpp.o.d -o CMakeFiles/pg_simple.dir/src/Elements.cpp.o -c /home/arguableplains/Documents/Workspace/Programacoes/C++/Graphics/ProceduralGeneration-Simple/src/Elements.cpp
+
+CMakeFiles/pg_simple.dir/src/Elements.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/pg_simple.dir/src/Elements.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/arguableplains/Documents/Workspace/Programacoes/C++/Graphics/ProceduralGeneration-Simple/src/Elements.cpp > CMakeFiles/pg_simple.dir/src/Elements.cpp.i
+
+CMakeFiles/pg_simple.dir/src/Elements.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/pg_simple.dir/src/Elements.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/arguableplains/Documents/Workspace/Programacoes/C++/Graphics/ProceduralGeneration-Simple/src/Elements.cpp -o CMakeFiles/pg_simple.dir/src/Elements.cpp.s
+
 CMakeFiles/pg_simple.dir/src/ElementsMath.cpp.o: CMakeFiles/pg_simple.dir/flags.make
 CMakeFiles/pg_simple.dir/src/ElementsMath.cpp.o: ../src/ElementsMath.cpp
 CMakeFiles/pg_simple.dir/src/ElementsMath.cpp.o: CMakeFiles/pg_simple.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/arguableplains/Documents/Workspace/Programacoes/C++/Graphics/ProceduralGeneration-Simple/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/pg_simple.dir/src/ElementsMath.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/arguableplains/Documents/Workspace/Programacoes/C++/Graphics/ProceduralGeneration-Simple/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/pg_simple.dir/src/ElementsMath.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pg_simple.dir/src/ElementsMath.cpp.o -MF CMakeFiles/pg_simple.dir/src/ElementsMath.cpp.o.d -o CMakeFiles/pg_simple.dir/src/ElementsMath.cpp.o -c /home/arguableplains/Documents/Workspace/Programacoes/C++/Graphics/ProceduralGeneration-Simple/src/ElementsMath.cpp
 
 CMakeFiles/pg_simple.dir/src/ElementsMath.cpp.i: cmake_force
@@ -100,7 +114,7 @@ CMakeFiles/pg_simple.dir/src/ElementsMath.cpp.s: cmake_force
 CMakeFiles/pg_simple.dir/src/Shaders.cpp.o: CMakeFiles/pg_simple.dir/flags.make
 CMakeFiles/pg_simple.dir/src/Shaders.cpp.o: ../src/Shaders.cpp
 CMakeFiles/pg_simple.dir/src/Shaders.cpp.o: CMakeFiles/pg_simple.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/arguableplains/Documents/Workspace/Programacoes/C++/Graphics/ProceduralGeneration-Simple/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/pg_simple.dir/src/Shaders.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/arguableplains/Documents/Workspace/Programacoes/C++/Graphics/ProceduralGeneration-Simple/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/pg_simple.dir/src/Shaders.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pg_simple.dir/src/Shaders.cpp.o -MF CMakeFiles/pg_simple.dir/src/Shaders.cpp.o.d -o CMakeFiles/pg_simple.dir/src/Shaders.cpp.o -c /home/arguableplains/Documents/Workspace/Programacoes/C++/Graphics/ProceduralGeneration-Simple/src/Shaders.cpp
 
 CMakeFiles/pg_simple.dir/src/Shaders.cpp.i: cmake_force
@@ -114,6 +128,7 @@ CMakeFiles/pg_simple.dir/src/Shaders.cpp.s: cmake_force
 # Object files for target pg_simple
 pg_simple_OBJECTS = \
 "CMakeFiles/pg_simple.dir/src/main.cpp.o" \
+"CMakeFiles/pg_simple.dir/src/Elements.cpp.o" \
 "CMakeFiles/pg_simple.dir/src/ElementsMath.cpp.o" \
 "CMakeFiles/pg_simple.dir/src/Shaders.cpp.o"
 
@@ -121,12 +136,13 @@ pg_simple_OBJECTS = \
 pg_simple_EXTERNAL_OBJECTS =
 
 pg_simple: CMakeFiles/pg_simple.dir/src/main.cpp.o
+pg_simple: CMakeFiles/pg_simple.dir/src/Elements.cpp.o
 pg_simple: CMakeFiles/pg_simple.dir/src/ElementsMath.cpp.o
 pg_simple: CMakeFiles/pg_simple.dir/src/Shaders.cpp.o
 pg_simple: CMakeFiles/pg_simple.dir/build.make
 pg_simple: /usr/lib/x86_64-linux-gnu/libglfw.so.3.3
 pg_simple: CMakeFiles/pg_simple.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/arguableplains/Documents/Workspace/Programacoes/C++/Graphics/ProceduralGeneration-Simple/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable pg_simple"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/arguableplains/Documents/Workspace/Programacoes/C++/Graphics/ProceduralGeneration-Simple/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable pg_simple"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/pg_simple.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

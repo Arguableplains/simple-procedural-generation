@@ -129,6 +129,30 @@ pg_simple/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pg_simple.dir/build.make CMakeFiles/pg_simple.dir/build
 .PHONY : pg_simple/fast
 
+src/Elements.o: src/Elements.cpp.o
+.PHONY : src/Elements.o
+
+# target to build an object file
+src/Elements.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pg_simple.dir/build.make CMakeFiles/pg_simple.dir/src/Elements.cpp.o
+.PHONY : src/Elements.cpp.o
+
+src/Elements.i: src/Elements.cpp.i
+.PHONY : src/Elements.i
+
+# target to preprocess a source file
+src/Elements.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pg_simple.dir/build.make CMakeFiles/pg_simple.dir/src/Elements.cpp.i
+.PHONY : src/Elements.cpp.i
+
+src/Elements.s: src/Elements.cpp.s
+.PHONY : src/Elements.s
+
+# target to generate assembly for a file
+src/Elements.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pg_simple.dir/build.make CMakeFiles/pg_simple.dir/src/Elements.cpp.s
+.PHONY : src/Elements.cpp.s
+
 src/ElementsMath.o: src/ElementsMath.cpp.o
 .PHONY : src/ElementsMath.o
 
@@ -210,6 +234,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... pg_simple"
+	@echo "... src/Elements.o"
+	@echo "... src/Elements.i"
+	@echo "... src/Elements.s"
 	@echo "... src/ElementsMath.o"
 	@echo "... src/ElementsMath.i"
 	@echo "... src/ElementsMath.s"

@@ -396,5 +396,6 @@ CMakeFiles/pg_simple.dir/src/main.cpp.o: \
  /usr/include/c++/11/cstring /usr/include/string.h /usr/include/strings.h \
  /home/arguableplains/Documents/Workspace/Programacoes/C++/Graphics/ProceduralGeneration-Simple/include/glm/gtc/type_ptr.inl \
  /home/arguableplains/Documents/Workspace/Programacoes/C++/Graphics/ProceduralGeneration-Simple/include/ElementsMath.h \
+ /home/arguableplains/Documents/Workspace/Programacoes/C++/Graphics/ProceduralGeneration-Simple/include/Elements.h \
  /usr/include/GL/glew.h /usr/include/GL/glu.h /usr/include/GL/gl.h \
  /usr/include/GLFW/glfw3.h

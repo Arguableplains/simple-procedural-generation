@@ -5,15 +5,17 @@
 #include "Elements.h"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <random>
 
 using namespace std;
 
 int main(){
 
     // Constants
-    srand(time(0));
-    double old_time;
+    default_random_engine generator((unsigned)time(0));
+    uniform_real_distribution<float> distribution(-90.0f, 90.0f);
     double new_time;
+    float new_angle = 0.0f;
 
     if (!glfwInit())
         return -1;
@@ -57,25 +59,26 @@ int main(){
 
         // Elements object
 
-        if ((int)glfwGetTime() % 2 == 0)  {
-            vertices[7] = glfwGetTime();
-            vertices[6] = -glfwGetTime();
-        }
-        else {
-            vertices[7] = glfwGetTime();
-            vertices[6] = glfwGetTime();
-        }
-
         Elements elements(vertices, indices, sizeof(vertices), sizeof(indices));
 
         // Writing the shaders stringsm, creating and compile the shaders programs
-        std::string fragmentShader = shader_obj.FragShader();
-        std::string vertexShader =  shader_obj.VertexShader();
+        string fragmentShader = shader_obj.FragShader();
+        string vertexShader =  shader_obj.VertexShader();
         unsigned int shader = shader_obj.CreateShader(vertexShader, fragmentShader);
         glUseProgram(shader);
 
+        // Rotate Tick
+        if((glfwGetTime() - new_time) > 2){
+            new_angle = distribution(generator);
+            new_time = glfwGetTime();
+        }
+
         // Base rendering
+        elementsmath.rotate("model", new_angle, 0.0f, 0.0f, 1.0f);
+        elementsmath.translate("view", 0.0f, -glfwGetTime() / 10.0f, 0.0f);
         elementsmath.MountTransformMatrix();
+        elementsmath.Reset();
+
         shader_obj.UniformConfig("transform", shader, elementsmath.getTransformMatrix());
         glDrawElements(GL_LINES, 11, GL_UNSIGNED_INT, 0);
 

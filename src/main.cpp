@@ -35,7 +35,7 @@ int main(){
 
     float vertices[] = {
         0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
-        0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 1.0f
+        0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f
     };
 
     unsigned int indices[] = {
@@ -57,8 +57,15 @@ int main(){
         glClear(GL_COLOR_BUFFER_BIT);
         glEnable(GL_DEPTH_TEST | GL_DEPTH_BUFFER_BIT);
 
-        // Elements object
+        // Rotate Tick
+        if((glfwGetTime() - new_time) > 1.0){
+            new_angle = distribution(generator);
+            new_time = glfwGetTime();
+        }
 
+        vertices[7] = (glfwGetTime() - new_time);
+
+        // Elements object
         Elements elements(vertices, indices, sizeof(vertices), sizeof(indices));
 
         // Writing the shaders stringsm, creating and compile the shaders programs
@@ -66,12 +73,6 @@ int main(){
         string vertexShader =  shader_obj.VertexShader();
         unsigned int shader = shader_obj.CreateShader(vertexShader, fragmentShader);
         glUseProgram(shader);
-
-        // Rotate Tick
-        if((glfwGetTime() - new_time) > 2){
-            new_angle = distribution(generator);
-            new_time = glfwGetTime();
-        }
 
         // Base rendering
         elementsmath.rotate("model", new_angle, 0.0f, 0.0f, 1.0f);

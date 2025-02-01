@@ -6,7 +6,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <random>
-#include <vector>
+#include <deque>
 
 using namespace std;
 
@@ -35,12 +35,12 @@ int main(){
 
     // Elements vertices and indices to draw
 
-    vector<float> vertices = {
+    deque<float> vertices = {
         0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
         0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 1.0f
     };
 
-    vector <unsigned int> indices = {
+    deque <unsigned int> indices = {
         0, 1
     };
 
@@ -59,17 +59,16 @@ int main(){
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // Clear the previous frame
-        glClear(GL_COLOR_BUFFER_BIT);
-        glEnable(GL_DEPTH_TEST | GL_DEPTH_BUFFER_BIT);
+        glEnable(GL_DEPTH_TEST);
 
         // Timer Tick
-        if((glfwGetTime() - new_time) > 1.0){
+        if((glfwGetTime() - new_time) > 0.1){
             counter+=2;
             new_angle = (distribution(generator)/180)*acos(-1);
             new_time = glfwGetTime();
 
-            new_endpoint[0] = last_endpoint[0] + 0.5f * cos(new_angle);
-            new_endpoint[1] = last_endpoint[1] + 0.5f * sin(new_angle);
+            new_endpoint[0] = last_endpoint[0] + 0.2f * cos(new_angle);
+            new_endpoint[1] = last_endpoint[1] + 0.2f * sin(new_angle);
 
             // Adding new informations to the main array - new rods
             vertices.push_back(last_endpoint[0]);
@@ -93,6 +92,21 @@ int main(){
             //Update indices
             indices.push_back(indices[indices.size()-1] + 1);
             indices.push_back(indices[indices.size()-1] + 1);
+
+            if(counter > 1000000){
+                vertices.pop_front();
+                vertices.pop_front();
+                vertices.pop_front();
+                vertices.pop_front();
+                vertices.pop_front();
+                vertices.pop_front();
+                vertices.pop_front();
+                vertices.pop_front();
+                vertices.pop_front();
+                vertices.pop_front();
+                vertices.pop_front();
+                vertices.pop_front();
+            }
 
         }
 
@@ -133,4 +147,3 @@ int main(){
     glfwTerminate();
     return 0;
 }
-

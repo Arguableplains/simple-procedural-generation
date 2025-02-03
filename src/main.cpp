@@ -19,6 +19,11 @@ int main(){
     float new_angle = 0.0f;
     int counter = 0;
 
+    int start_index = 0;
+    int end_index = 0;
+
+    int rod_render_number = 5;
+
     if (!glfwInit())
         return -1;
 
@@ -34,7 +39,6 @@ int main(){
     glewInit();
 
     // Elements vertices and indices to draw
-
     deque<float> vertices = {
         0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
         0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 1.0f
@@ -44,12 +48,50 @@ int main(){
         0, 1
     };
 
+    /*
+    float vertices[rod_render_number * 6];
+    vertices[0] = 0.0f;
+    vertices[1] = 0.0f;
+    vertices[2] = 0.0f;
+
+    vertices[3] = 1.0f;
+    vertices[4] = 1.0f;
+    vertices[5] = 1.0f;
+
+    vertices[6] = 0.0f;
+    vertices[7] = 1.0f;
+    vertices[8] = 0.0f;
+
+    vertices[9] = 1.0f;
+    vertices[10] = 1.0f;
+    vertices[11] = 1.0f;
+
+    unsigned int indices[20];
+    for(int i = 0; i < 20; i++){
+        indices[i] = i;
+    }
+    */
+
     // Main GL objects
     Shaders shader_obj;
     ElementsMath elementsmath;
 
+    // Writing the shaders stringsm, creating and compile the shaders programs
+    string fragmentShader = shader_obj.FragShader();
+    string vertexShader =  shader_obj.VertexShader();
+    unsigned int shader = shader_obj.CreateShader(vertexShader, fragmentShader);
+
     float last_endpoint[2] = {vertices[6], vertices[7]};
     float new_endpoint[2];
+
+    // Elements object
+    float vertices_arr[vertices.size()];
+    copy(vertices.begin(), vertices.end(), vertices_arr);
+
+    unsigned int indices_arr[indices.size()];
+    copy(indices.begin(), indices.end(), indices_arr);
+
+    Elements elements(vertices_arr, indices_arr, sizeof(vertices_arr), sizeof(indices_arr));
 
     // Loop until the user closes the window
     while (!glfwWindowShouldClose(window)){
@@ -62,28 +104,53 @@ int main(){
         glEnable(GL_DEPTH_TEST);
 
         // Timer Tick
-        if((glfwGetTime() - new_time) > 0.1){
+        if((glfwGetTime() - new_time) > 0.01f){
             counter+=2;
             new_angle = (distribution(generator)/180)*acos(-1);
             new_time = glfwGetTime();
 
-            new_endpoint[0] = last_endpoint[0] + 0.2f * cos(new_angle);
-            new_endpoint[1] = last_endpoint[1] + 0.2f * sin(new_angle);
+            new_endpoint[0] = last_endpoint[0] + 0.1f * cos(new_angle);
+            new_endpoint[1] = last_endpoint[1] + 0.1f * sin(new_angle);
 
-            // Adding new informations to the main array - new rods
-            vertices.push_back(last_endpoint[0]);
-            vertices.push_back(last_endpoint[1]);
-            vertices.push_back(0.0f);
-            vertices.push_back(1.0f);
-            vertices.push_back(1.0f);
-            vertices.push_back(1.0f);
+            if(new_endpoint[0] < 1.0f && new_endpoint[0] > -1.0f){
 
-            vertices.push_back(new_endpoint[0]);
-            vertices.push_back(new_endpoint[1]);
-            vertices.push_back(0.0f);
-            vertices.push_back(1.0f);
-            vertices.push_back(1.0f);
-            vertices.push_back(1.0f);
+                // Adding new informations to the main array - new rods
+                vertices.push_back(last_endpoint[0]);
+                vertices.push_back(last_endpoint[1]);
+                vertices.push_back(0.0f);
+                vertices.push_back(1.0f);
+                vertices.push_back(1.0f);
+                vertices.push_back(1.0f);
+
+                vertices.push_back(new_endpoint[0]);
+                vertices.push_back(new_endpoint[1]);
+                vertices.push_back(0.0f);
+                vertices.push_back(1.0f);
+                vertices.push_back(1.0f);
+                vertices.push_back(1.0f);
+
+                /*
+                // Adding new informations to the main array - new inverted rods
+                vertices.push_back(last_endpoint[0]);
+                vertices.push_back(last_endpoint[1]);
+                vertices.push_back(0.0f);
+                vertices.push_back(1.0f);
+                vertices.push_back(1.0f);
+                vertices.push_back(1.0f);
+
+                vertices.push_back(-new_endpoint[0]);
+                vertices.push_back(new_endpoint[1]);
+                vertices.push_back(0.0f);
+                vertices.push_back(1.0f);
+                vertices.push_back(1.0f);
+                vertices.push_back(1.0f);
+                */
+
+                cout << "_______________________________" << endl;
+                    cout << new_endpoint[0] << endl;
+                    cout << new_endpoint[1] << endl;
+                cout << "_______________________________" << endl;
+            }
 
             // Update lastEndpoint
             last_endpoint[0] = new_endpoint[0];
@@ -108,34 +175,40 @@ int main(){
                 vertices.pop_front();
             }
 
+            float vertices_arr[vertices.size()];
+            copy(vertices.begin(), vertices.end(), vertices_arr);
+
+            unsigned int indices_arr[indices.size()];
+            copy(indices.begin(), indices.end(), indices_arr);
+
+            elements.BindBuffer(GL_ARRAY_BUFFER, elements.VBO);
+            elements.BufferData(GL_ARRAY_BUFFER, sizeof(vertices_arr), vertices_arr, GL_STATIC_DRAW);
+
+            elements.BindBuffer(GL_ARRAY_BUFFER, elements.EBO);
+            elements.BufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices_arr), indices_arr, GL_STATIC_DRAW);
+
+            /*
+            elements.BindBuffer(GL_ARRAY_BUFFER, elements.VBO);
+            elements.BufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices, GL_STATIC_DRAW);
+
+            elements.BindBuffer(GL_ARRAY_BUFFER, elements.EBO);
+            elements.BufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), indices, GL_STATIC_DRAW);
+            */
+
         }
 
-        // Elements object
-        float vertices_arr[vertices.size()];
-        copy(vertices.begin(), vertices.end(), vertices_arr);
-
-        unsigned int indices_arr[indices.size()];
-        copy(indices.begin(), indices.end(), indices_arr);
-
-        Elements elements(vertices_arr, indices_arr, sizeof(vertices_arr), sizeof(indices_arr));
-
-        // Writing the shaders stringsm, creating and compile the shaders programs
-        string fragmentShader = shader_obj.FragShader();
-        string vertexShader =  shader_obj.VertexShader();
-        unsigned int shader = shader_obj.CreateShader(vertexShader, fragmentShader);
         glUseProgram(shader);
 
         // Base rendering
         //elementsmath.rotate("model", new_angle, 0.0f, 0.0f, 1.0f);
-        elementsmath.translate("view", 0.0f, -glfwGetTime() / 5.0f, 0.0f);
+        elementsmath.translate("view", 0.0f, -glfwGetTime() / 2.0f, 0.0f);
         elementsmath.MountTransformMatrix();
 
         shader_obj.UniformConfig("transform", shader, elementsmath.getTransformMatrix());
+
+        elements.BindVertexArray(elements.VAO);
         glDrawElements(GL_LINES, counter, GL_UNSIGNED_INT, 0);
         elementsmath.Reset();
-
-        cout << "new_indice_numbers:" << endl;
-        cout << counter << endl;
 
         // Swap front and back buffers
         glfwSwapBuffers(window);
@@ -144,6 +217,8 @@ int main(){
         glFlush();
     }
 
+
     glfwTerminate();
     return 0;
 }
+

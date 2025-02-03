@@ -31,3 +31,15 @@ Elements::~Elements(){
     glDeleteBuffers( 1, &EBO );
 
 }
+
+void Elements::BindBuffer(GLenum target, unsigned int buffer){
+    glBindBuffer(target, buffer);
+}
+
+void Elements::BufferData(GLenum target, GLsizeiptr size, const void * data, GLenum usage){
+    glBufferData(target, size, data, usage);
+}
+
+void Elements::BindVertexArray(unsigned int buffer){
+    glBindVertexArray(buffer);
+}

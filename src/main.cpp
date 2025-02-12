@@ -12,11 +12,15 @@ using namespace std;
 
 int main(){
 
-    // Constants
+    // Random Generation
     default_random_engine generator(time(0));
     uniform_real_distribution<float> distribution(-0.2f, 0.2f);
-    double new_time;
+
+    // Important Variables
+    double currentTime;
+    double lastTime = 0;
     float new_x1, new_y1, new_x2, new_y2, last_x, last_y, new_value;
+    deque<pair<float, float>> endpoints;
 
     if (!glfwInit())
         return -1;
@@ -42,8 +46,6 @@ int main(){
         0, 1
     };
 
-    deque<pair<float, float>> endpoints;
-
     // Main GL objects
     Shaders shader_obj;
     ElementsMath elementsmath;
@@ -67,14 +69,17 @@ int main(){
 
         // Render
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        // Clear the previous frame
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        // Clear the previous frame
         glEnable(GL_DEPTH_TEST);
+        glDepthFunc(GL_LESS);
+
 
         // Timer Tick
-        if((glfwGetTime() - new_time) > 0.35f){
-            new_time = glfwGetTime();
+        currentTime = glfwGetTime();
+        if((currentTime - lastTime) > 0.35f){
+            lastTime = glfwGetTime();
 
             endpoints.clear();
              // Fiding where the new rods gonna be putted
@@ -188,7 +193,7 @@ int main(){
             elements.BindBuffer(GL_ARRAY_BUFFER, elements.VBO);
             elements.BufferData(GL_ARRAY_BUFFER, sizeof(vertices_arr), vertices_arr, GL_STATIC_DRAW);
 
-            elements.BindBuffer(GL_ARRAY_BUFFER, elements.EBO);
+            elements.BindBuffer(GL_ELEMENT_ARRAY_BUFFER, elements.EBO);
             elements.BufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices_arr), indices_arr, GL_STATIC_DRAW);
 
         }

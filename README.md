@@ -5,7 +5,7 @@ With that in mind, this program was designed to generate an infinite number of r
 
 Those rods keep being united to the last ones generated, forming a continuos line of selected paths by through the generation can keep going
 
-![](https://github.com/Arguableplains/simple-procedural-generation/blob/master/pg-simple.gif)
+![](https://github.com/Arguableplains/simple-procedural-generation/blob/main/pg-simple.gif)
 
 If you want to run it on your PC, be sure to have Cmake, make and the libraries (OpenGL, glfw and GLEW) installed
 
